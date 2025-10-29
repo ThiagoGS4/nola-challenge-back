@@ -1,0 +1,36 @@
+# Arquivo .gitignore para o Backend (Node.js + TypeScript)
+
+# 1. Segurança (Crítico!)
+# Ignora o arquivo com as senhas do banco de dados
+.env
+.env.*
+!.env.example
+
+# 2. Dependências
+# Ignora a pasta de módulos
+node_modules/
+
+# 3. Build do TypeScript
+# Ignora a pasta 'dist' que o seu tsconfig.json gera
+dist/
+
+# 4. Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# 5. Arquivos de Editor e OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+Thumbs.db
