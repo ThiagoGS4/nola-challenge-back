@@ -1,3 +1,4 @@
+import { IPerformanceComparisoPayload } from "../../types/mainTypes";
 import mainData from "../data/main.data";
 import moment from "moment";
 
@@ -22,13 +23,31 @@ class ProductService {
   async getMonthlyOverview(filters: {
     selectedMonth: string;
   }) {
-    
     try {
       let dbResults = await mainData.getMonthlyOverview(filters);
       
       dbResults = dbResults.map(result => ({
         ...result,
         day: moment(result.day).format("YYYY-MM-DD")
+      }))
+      
+      
+      return dbResults;
+    } catch (error) {
+      // Aqui você pode tratar erros específicos do Knex
+      console.error("Erro no Service ao buscar produtos:", error);
+      // Lança um erro amigável para o GraphQL
+      throw new Error("Não foi possível buscar o relatório de produtos.");
+    }
+  }
+
+  async getPerformanceComparison(filters: IPerformanceComparisoPayload){
+    try {
+      let dbResults = await mainData.getPerformanceComparison(filters);
+      
+      dbResults = dbResults.map(result => ({
+        ...result,
+        full_address: `${result.address_street}, ${result.address_number}`
       }))
       
       

@@ -1,3 +1,4 @@
+import { IPerformanceComparisoPayload } from "../../types/mainTypes";
 import mainData from "../data/main.data";
 import mainService from "../service/main.service";
 
@@ -14,6 +15,14 @@ export const productResolvers = {
     ) => {
       
       return mainService.getMonthlyOverview(args.filters); 
+    },
+
+    getPerformanceComparison: async (
+      _parent: any,
+      args: { filters: IPerformanceComparisoPayload }
+    ) => {
+      
+      return mainService.getPerformanceComparison(args.filters); 
     },
 
   },
