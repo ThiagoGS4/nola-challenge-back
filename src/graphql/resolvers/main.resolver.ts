@@ -1,20 +1,21 @@
 import mainData from "../data/main.data";
+import mainService from "../service/main.service";
 
-    export const productResolvers = { Query: {
+export const productResolvers = {
+  Query: {
+    getTopSellingProducts: async (_parent: any, args: { limit: number }) => {
+      
+      return mainService.getTopSellingProducts(args);
+    },
 
-    // Este resolver é "burro": ele só repassa a chamada
-    // para a camada de serviço e retorna o que ela der.
-    getTopSellingProducts: async (
+    getMonthlyOverview: async (
       _parent: any,
-      args: { limit: number }
+      args: { filters: { selectedMonth: string; } }
     ) => {
-      // Chama o serviço (controller) com os argumentos
-      return mainData.getStopSelers(args);
-    }
+      
+      return mainService.getMonthlyOverview(args.filters); 
+    },
 
-    // adicionar queries
+  },
 
-    }
-
-    // Mutations iriam aqui (ex: Mutation: { ... })
-     };
+};

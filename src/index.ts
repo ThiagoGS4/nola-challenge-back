@@ -9,7 +9,7 @@ console.log("Servidor TypeScript rodando!");
 async function startServer() {
   // 1. Testa a conexão com o banco antes de subir a API
   try {
-    await db.raw('SELECT 1+1');
+    await db.raw("SELECT 1+1");
     console.log("✅ Conexão com o banco de dados OK.");
   } catch (error) {
     console.error("❌ Erro ao conectar com o banco. Abortando...");
@@ -21,6 +21,10 @@ async function startServer() {
   const server = new ApolloServer({
     typeDefs, // pega todos os typedefs
     resolvers, // pega todos os resolvers
+    cors: {
+      origin: "http://localhost:5173", // 👈 Permite seu frontend Vue
+      credentials: true, // Permite o envio de cookies (útil no futuro)
+    },
   });
 
   // 3. Inicia o servidor
