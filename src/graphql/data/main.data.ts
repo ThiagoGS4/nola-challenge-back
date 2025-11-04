@@ -1,15 +1,12 @@
 import knex from "knex";
 import db from "../../database";
-import { IPerformanceComparisoPayload } from "../../types/mainTypes";
+import { IPerformanceComparisonPayload } from "../../types/mainTypes";
 
 interface DbTopProduct {
   product_id: number;
   product_name: string;
   total_sold: string;
 }
-
-const var1 = "2025-05-01";
-const var2 = "2025-05-31";
 
 export default class mainData {
   static async getStopSelers(filters: { limit: number }) {
@@ -55,7 +52,7 @@ export default class mainData {
       throw new Error("Falha ao buscar dados do relatório.");
     }
   }
-  static async getPerformanceComparison(filters: IPerformanceComparisoPayload) {
+  static async getPerformanceComparison(filters: IPerformanceComparisonPayload) {
     let query = db("sales as s");
     query = query.join("stores as st", "st.id", "s.store_id");
     
@@ -94,6 +91,10 @@ export default class mainData {
       query = query.where("st.is_own", filters.isOwn);
     }
     //lembrar de colocar uma indicação que ela eh dona no front...
+
+    if (filters.storeIds && filters.storeIds.length > 0) {
+      query = query.whereIn("st.id", filters.storeIds);
+    }
     
     // agrupamento por loja
     query = query.groupBy(
@@ -105,10 +106,24 @@ export default class mainData {
     );
 
     query = query.orderBy("total_earnings", "desc");
-    query = query.limit(10);
 
     try {
       const report = await query;
+      
+      return report;
+    } catch (error) {
+      console.error("❌ ERRO AO EXECUTAR A QUERY:", error);
+      throw new Error("Falha ao buscar dados do relatório.");
+    }
+  }
+  static async getAllStores () {
+    let query = db('stores as st')
+    query = query.select('id as storeId', 'name as storeName')
+
+     try {
+      const report = await query;
+      
+
       return report;
     } catch (error) {
       console.error("❌ ERRO AO EXECUTAR A QUERY:", error);

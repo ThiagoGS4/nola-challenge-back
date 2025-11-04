@@ -1,7 +1,13 @@
-export interface IPerformanceComparisoPayload {
-  states?: string[]
-  ditrict?: string
-  dateStart?: string
-  dateEnd?: string
-  isOwn?: boolean
+export interface IMonthlyOverviewFilters {
+  selectedMonth: string; // YYYY-MM
+  channels?: number[];
+}
+
+export interface IPerformanceComparisonPayload {
+  dateStart: string;
+  dateEnd: string;
+  storeIds?: number[];
+  states?: string[];
+  district?: string;
+  isOwn?: boolean;
 }

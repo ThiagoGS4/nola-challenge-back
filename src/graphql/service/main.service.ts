@@ -1,10 +1,9 @@
-import { IPerformanceComparisoPayload } from "../../types/mainTypes";
+import { IMonthlyOverviewFilters, IPerformanceComparisonPayload } from "../../types/mainTypes";
 import mainData from "../data/main.data";
 import moment from "moment";
 
 class ProductService {
   async getTopSellingProducts(filters: { limit: number }) {
-
     
     try {
       const dbResults = await mainData.getStopSelers(filters);
@@ -20,9 +19,7 @@ class ProductService {
     }
   }
 
-  async getMonthlyOverview(filters: {
-    selectedMonth: string;
-  }) {
+  async getMonthlyOverview(filters: IMonthlyOverviewFilters) {
     try {
       let dbResults = await mainData.getMonthlyOverview(filters);
       
@@ -41,7 +38,7 @@ class ProductService {
     }
   }
 
-  async getPerformanceComparison(filters: IPerformanceComparisoPayload){
+  async getPerformanceComparison(filters: IPerformanceComparisonPayload){
     try {
       let dbResults = await mainData.getPerformanceComparison(filters);
       
@@ -58,6 +55,12 @@ class ProductService {
       // Lança um erro amigável para o GraphQL
       throw new Error("Não foi possível buscar o relatório de produtos.");
     }
+  }
+
+  async getAllStores () {
+    let dbResults = await mainData.getAllStores()
+
+    return dbResults
   }
 }
 

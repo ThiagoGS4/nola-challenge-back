@@ -1,4 +1,4 @@
-import { IPerformanceComparisoPayload } from "../../types/mainTypes";
+import { IMonthlyOverviewFilters, IPerformanceComparisonPayload } from "../../types/mainTypes";
 import mainData from "../data/main.data";
 import mainService from "../service/main.service";
 
@@ -11,7 +11,7 @@ export const productResolvers = {
 
     getMonthlyOverview: async (
       _parent: any,
-      args: { filters: { selectedMonth: string; } }
+      args: { filters: IMonthlyOverviewFilters }
     ) => {
       
       return mainService.getMonthlyOverview(args.filters); 
@@ -19,11 +19,15 @@ export const productResolvers = {
 
     getPerformanceComparison: async (
       _parent: any,
-      args: { filters: IPerformanceComparisoPayload }
+      args: { filters: IPerformanceComparisonPayload }
     ) => {
       
       return mainService.getPerformanceComparison(args.filters); 
     },
+
+    getAllStores: async (_parent: any,) => {
+      return mainService.getAllStores()
+    }
 
   },
 

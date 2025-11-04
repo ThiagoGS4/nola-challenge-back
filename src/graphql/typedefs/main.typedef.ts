@@ -14,6 +14,7 @@ export const productTypeDefs = gql`
 
   input inputMonthlyOverview {
     selectedMonth: String!
+    channels: [Int]
   }
 
   type PerformanceComparison {
@@ -33,11 +34,18 @@ export const productTypeDefs = gql`
     dateStart: String
     dateEnd: String
     isOwn: Boolean
+    storeIds: [Int]
+  }
+
+  type AllStores {
+    storeId: Int
+    storeName: String
   }
 
   type Query {
     getTopSellingProducts(limit: Int = 10): [TopProductReport]
     getMonthlyOverview(filters: inputMonthlyOverview): [MonthlyOverview]
     getPerformanceComparison(filters: inputPerformanceComparison): [PerformanceComparison]
+    getAllStores: [AllStores]
   }
 `;
