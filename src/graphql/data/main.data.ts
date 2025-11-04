@@ -56,10 +56,8 @@ export default class mainData {
     let query = db("sales as s");
     query = query.join("stores as st", "st.id", "s.store_id");
     
-    // 1. PRECISAMOS dos pagamentos para calcular a performance (faturamento)
     query = query.leftJoin("payments as py", "py.sale_id", "s.id");
 
-    // 2. SELECIONE os KPIs (Métricas de Performance)
     query = query.select(
       "st.name",
       "st.city",
@@ -90,13 +88,11 @@ export default class mainData {
     if (filters.isOwn === true || filters.isOwn === false) {
       query = query.where("st.is_own", filters.isOwn);
     }
-    //lembrar de colocar uma indicação que ela eh dona no front...
 
     if (filters.storeIds && filters.storeIds.length > 0) {
       query = query.whereIn("st.id", filters.storeIds);
     }
     
-    // agrupamento por loja
     query = query.groupBy(
       "st.id",
       "st.name",

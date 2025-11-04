@@ -31,9 +31,7 @@ class ProductService {
       
       return dbResults;
     } catch (error) {
-      // Aqui você pode tratar erros específicos do Knex
       console.error("Erro no Service ao buscar produtos:", error);
-      // Lança um erro amigável para o GraphQL
       throw new Error("Não foi possível buscar o relatório de produtos.");
     }
   }
@@ -50,9 +48,7 @@ class ProductService {
       
       return dbResults;
     } catch (error) {
-      // Aqui você pode tratar erros específicos do Knex
       console.error("Erro no Service ao buscar produtos:", error);
-      // Lança um erro amigável para o GraphQL
       throw new Error("Não foi possível buscar o relatório de produtos.");
     }
   }
