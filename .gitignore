@@ -2,9 +2,9 @@
 
 # 1. Segurança (Crítico!)
 # Ignora o arquivo com as senhas do banco de dados
-.env
-.env.*
-!.env.example
+#.env
+#.env.*
+#!.env.example
 
 # 2. Dependências
 # Ignora a pasta de módulos
