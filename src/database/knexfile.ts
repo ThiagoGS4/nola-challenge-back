@@ -1,5 +1,5 @@
 import { Knex } from 'knex';
-//import 'dotenv/config'; // Importa para ler seu .env local
+import 'dotenv/config'; // Importa para ler seu .env local
 
 // Configuração para seu ambiente local (Docker)
 // Ele lê as variáveis do seu .env
